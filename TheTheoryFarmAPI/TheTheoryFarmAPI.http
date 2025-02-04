@@ -1,0 +1,6 @@
+@TheTheoryFarmAPI_HostAddress = http://localhost:5023
+
+GET {{TheTheoryFarmAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
