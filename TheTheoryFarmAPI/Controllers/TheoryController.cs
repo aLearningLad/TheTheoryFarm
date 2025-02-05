@@ -67,5 +67,24 @@ namespace TheTheoryFarmAPI.Controllers
             return Ok(response);
         }
 
+        // update by id
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateById([FromRoute]Guid id, [FromBody] UpdateTheoryDto updateTheoryDto)
+        {
+            // map dto to domain
+            var updatedDomainModel = mapper.Map<Theory>(updateTheoryDto);
+
+            // feed to repo update method
+            var response = await theoryRepository.UpdateTheory(id, updatedDomainModel);
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
     }
 }

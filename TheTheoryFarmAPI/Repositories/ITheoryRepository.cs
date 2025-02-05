@@ -14,7 +14,10 @@ namespace TheTheoryFarmAPI.Repositories
         Task<Theory?> GetTheoryById([FromRoute]Guid id);
 
         // create new 
-        Task<Theory> CreateTheory(Theory theory);
+        Task<Theory> CreateTheory([FromBody]Theory theory);
+
+        // update via id
+        Task<Theory> UpdateTheory([FromRoute]Guid Id, [FromBody] Theory theory);
 
     }
 }

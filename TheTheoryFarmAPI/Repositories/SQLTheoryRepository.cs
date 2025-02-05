@@ -46,5 +46,24 @@ namespace TheTheoryFarmAPI.Repositories
 
            return await theoryDbContext.Theories.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+
+        // update via id
+        public async Task<Theory> UpdateTheory([FromRoute] Guid id, [FromBody] Theory theory)
+        {
+            var previousTheory = await theoryDbContext.Theories.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(previousTheory == null) {
+                return null;
+            }
+
+            previousTheory.Title = theory.Title;
+            previousTheory.TheoryBody = theory.TheoryBody;
+            previousTheory.PublishedDate = theory.PublishedDate;
+
+            return previousTheory;
+        }
+
+
     }
 }
