@@ -86,5 +86,19 @@ namespace TheTheoryFarmAPI.Controllers
             return Ok(response);
         }
 
+        // delete by id
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteTheory([FromRoute] Guid id)
+        {
+            var response = await theoryRepository.DeleteTheory(id);
+
+            if(response == null)
+            {
+                return NotFound();
+            }
+
+            return Ok("Successfully found and deleted that theory");
+        }
     }
 }

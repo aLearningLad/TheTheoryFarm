@@ -9,7 +9,6 @@ namespace TheTheoryFarmAPI.Repositories
         // get all
         Task<List<Theory>> GetAll();
 
-
         // get by id
         Task<Theory?> GetTheoryById([FromRoute]Guid id);
 
@@ -19,5 +18,7 @@ namespace TheTheoryFarmAPI.Repositories
         // update via id
         Task<Theory> UpdateTheory([FromRoute]Guid Id, [FromBody] Theory theory);
 
+        // delete via id
+        Task<Theory> DeleteTheory([FromRoute] Guid id);
     }
 }

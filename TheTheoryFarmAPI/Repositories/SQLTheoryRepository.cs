@@ -61,9 +61,29 @@ namespace TheTheoryFarmAPI.Repositories
             previousTheory.TheoryBody = theory.TheoryBody;
             previousTheory.PublishedDate = theory.PublishedDate;
 
+            await theoryDbContext.SaveChangesAsync();
+
             return previousTheory;
         }
 
+
+        // delete via id
+        public async Task<Theory> DeleteTheory([FromRoute] Guid id)
+        {
+
+            // find theory by id
+            var targetTheory = await theoryDbContext.Theories.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(targetTheory == null)
+            {
+                return null;
+            }
+
+            // delete it
+             theoryDbContext.Theories.Remove(targetTheory);
+            await theoryDbContext.SaveChangesAsync();
+            return targetTheory;
+        }
 
     }
 }
