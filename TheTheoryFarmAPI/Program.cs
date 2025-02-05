@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TheTheoryFarmAPI.Data;
+using TheTheoryFarmAPI.Mappings;
 using TheTheoryFarmAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TheoryDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ITheoryRepository, SQLTheoryRepository>();
+builder.Services.AddAutoMapper(typeof(AutomapperProfile));
 
 var app = builder.Build();
 

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TheTheoryFarmAPI.Models.Domain;
+using TheTheoryFarmAPI.Models.DTOs;
 using TheTheoryFarmAPI.Repositories;
 
 namespace TheTheoryFarmAPI.Controllers
@@ -9,12 +12,14 @@ namespace TheTheoryFarmAPI.Controllers
     public class TheoryController : ControllerBase
     {
         private readonly ITheoryRepository theoryRepository;
+        private readonly IMapper mapper;
 
 
         // constructor so I can inject repository interface
-        public TheoryController(ITheoryRepository theoryRepository)
+        public TheoryController(ITheoryRepository theoryRepository, IMapper mapper)
         {
             this.theoryRepository = theoryRepository;
+            this.mapper = mapper;
         }
 
 
@@ -38,10 +43,14 @@ namespace TheTheoryFarmAPI.Controllers
 
         // create a theory entry
         [HttpPost]
-        public async Task<IActionResult> CreateTheory()
+        public async Task<IActionResult> CreateTheory([FromBody] AddTheoryRequestDto addTheoryRequestDto)
         {
 
-            return Ok();
+            // map dto to domain 
+            var theoryDomainModel = mapper.Map<Theory>(addTheoryRequestDto);
+            var response = await theoryRepository.CreateTheory(theoryDomainModel);
+
+            return Ok(response);
         }
     }
 }
