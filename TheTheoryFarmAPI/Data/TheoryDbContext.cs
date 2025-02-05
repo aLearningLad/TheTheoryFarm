@@ -5,7 +5,7 @@ namespace TheTheoryFarmAPI.Data
 {
     public class TheoryDbContext : DbContext
     {
-        public TheoryDbContext(DbContextOptions dbContextOptions): base (dbContextOptions)
+        public TheoryDbContext(DbContextOptions<TheoryDbContext> dbContextOptions): base (dbContextOptions)
         {
         }
 
