@@ -45,12 +45,27 @@ namespace TheTheoryFarmAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTheory([FromBody] AddTheoryRequestDto addTheoryRequestDto)
         {
-
             // map dto to domain 
             var theoryDomainModel = mapper.Map<Theory>(addTheoryRequestDto);
             var response = await theoryRepository.CreateTheory(theoryDomainModel);
 
             return Ok(response);
         }
+
+        // get a theory by its id
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> GetTheoryById([FromRoute] Guid id)
+        {
+            var response = await theoryRepository.GetTheoryById(id);
+
+            if(response == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
     }
 }

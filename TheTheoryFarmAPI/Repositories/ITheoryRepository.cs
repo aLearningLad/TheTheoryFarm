@@ -1,4 +1,5 @@
-﻿using TheTheoryFarmAPI.Models.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
+using TheTheoryFarmAPI.Models.Domain;
 using TheTheoryFarmAPI.Models.DTOs;
 
 namespace TheTheoryFarmAPI.Repositories
@@ -10,7 +11,7 @@ namespace TheTheoryFarmAPI.Repositories
 
 
         // get by id
-
+        Task<Theory?> GetTheoryById([FromRoute]Guid id);
 
         // create new 
         Task<Theory> CreateTheory(Theory theory);

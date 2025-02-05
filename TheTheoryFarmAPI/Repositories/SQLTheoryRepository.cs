@@ -39,6 +39,12 @@ namespace TheTheoryFarmAPI.Repositories
             return theory;
 
         }
+     
         
+        // get by id
+        public async Task<Theory?> GetTheoryById([FromRoute] Guid id) {
+
+           return await theoryDbContext.Theories.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }
