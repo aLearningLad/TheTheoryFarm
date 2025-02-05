@@ -16,5 +16,14 @@ namespace TheTheoryFarmAPI.Models.Domain
         public string TheoryBody { get; set; }
 
         public DateTime PublishedDate { get; set; } = DateTime.UtcNow; // sets date automatically when theory object is instantiated. Great
+    
+
+        // ***** un-comment below code when starting with users class and auth later
+        //public Guid CreatedById { get; set; } // foregin key --> id of user inside Users table
+
+
+        // navigation property
+       // public User CreatedBy { get; set; }
+    
     }
 }
