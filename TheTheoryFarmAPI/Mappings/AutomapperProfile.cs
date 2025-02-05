@@ -10,6 +10,7 @@ namespace TheTheoryFarmAPI.Mappings
         {
             CreateMap<Theory, TheoryDto>().ReverseMap();
             CreateMap<Theory, AddTheoryRequestDto>().ReverseMap();
+            CreateMap<Theory, UpdateTheoryDto>().ReverseMap();
         }
     }
 }
