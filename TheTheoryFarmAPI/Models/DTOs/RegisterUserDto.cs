@@ -13,5 +13,7 @@ namespace TheTheoryFarmAPI.Models.DTOs
         [MinLength(8, ErrorMessage = "Password has to be at least 8 characters long")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string[] Roles { get; set; }
     }
 }

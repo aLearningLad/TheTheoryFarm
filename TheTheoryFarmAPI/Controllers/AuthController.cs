@@ -18,11 +18,35 @@ namespace TheTheoryFarmAPI.Controllers
 
         // register a user
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterUserDto registerUserDto)
+        public async Task<IActionResult> Register([FromBody]RegisterUserDto registerUserDto)
         {
-            return Ok();
+
+            var identityUser = new IdentityUser
+            {
+                UserName = registerUserDto.Email,
+                Email = registerUserDto.Email,
+            };
+
+           var identityResult = await userManager.CreateAsync(identityUser, registerUserDto.Password);
+          
+            if (identityResult.Succeeded)
+            {
+
+                if(registerUserDto.Roles != null && registerUserDto.Roles.Any())
+                {
+                // attach roles to this user (reader, writer or both)
+              identityResult = await userManager.AddToRolesAsync(identityUser, registerUserDto.Roles);
+
+                    if(identityResult.Succeeded)
+                    {
+                        return Ok("User successfully registered. Permitted to login now.");
+                    }
+                }
+
+            }
+            return BadRequest("Something went wrong");
         }
 
-        // login a user
     }
+        // login a user
 }
