@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheTheoryFarmAPI.Models.DTOs;
@@ -47,6 +48,14 @@ namespace TheTheoryFarmAPI.Controllers
             return BadRequest("Something went wrong");
         }
 
+    // login a user
+    [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginUserDto loginUserDto )
+    {
+
+
+        return Ok("User logged in");
     }
-        // login a user
+    }
+
 }
