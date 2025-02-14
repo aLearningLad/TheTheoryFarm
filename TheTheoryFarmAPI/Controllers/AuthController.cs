@@ -19,6 +19,7 @@ namespace TheTheoryFarmAPI.Controllers
 
         // register a user
         [HttpPost]
+        [Route("Register")]
         public async Task<IActionResult> Register([FromBody]RegisterUserDto registerUserDto)
         {
 
@@ -48,14 +49,33 @@ namespace TheTheoryFarmAPI.Controllers
             return BadRequest("Something went wrong");
         }
 
-    // login a user
-    [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginUserDto loginUserDto )
-    {
+        // login a user
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserDto loginUserDto)
+        {
+            var user = await userManager.FindByEmailAsync(loginUserDto.Email);
+
+            if (user != null) {
+                var checkPasswordResult = await userManager.CheckPasswordAsync(user, loginUserDto.Password);
+
+                if (checkPasswordResult)
+                {
+                    // create a token to send back to client
 
 
-        return Ok("User logged in");
-    }
+                    // create the token & roles
+
+
+
+                    // send token to client
+                    return Ok();
+                };
+            };
+
+
+            return BadRequest("Either the username or password or BOTH are wrong. Please try again");
+        }
     }
 
 }
